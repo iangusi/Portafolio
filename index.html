@@ -49,79 +49,7 @@
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a:hover { color: var(--accent-color); }
-        /* --- MENU BUTTON (evitar fondo blanco por defecto) --- */
-.menu-btn {
-  display: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: var(--accent-color);
-
-  /* Evitar el fondo/blanco por defecto del <button> */
-  background: transparent;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-/* Ajuste visual del icono dentro del botón */
-.menu-btn i {
-  pointer-events: none;
-  display: inline-block;
-  line-height: 1;
-}
-
-/* Hover sutil para indicar interacción */
-.menu-btn:hover {
-  background: rgba(100, 255, 218, 0.06);
-}
-
-/* --- MENÚ MÓVIL (asegurar fondo oscuro y prioridad) --- */
-.nav-links.mobile {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 80%;
-  max-width: 320px;
-
-  /* Forzar el color de fondo oscuro (important solo si hace falta sobrescribir) */
-  background-color: rgba(10, 25, 47, 0.98) !important;
-
-  box-shadow: -10px 0 30px rgba(0,0,0,0.6);
-  display: flex;
-  flex-direction: column;
-  padding: calc(var(--nav-height) + 20px) 20px;
-  gap: 20px;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-
-  z-index: 1100; /* por encima del header */
-  color: var(--text-color); /* asegurar texto claro */
-}
-
-/* Forzar que los enlaces del menú móvil se vean en claro */
-.nav-links.mobile a {
-  color: var(--text-color);
-  font-size: 1.1rem;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
-}
-
-/* Opcional: foco/activo para accesibilidad */
-.nav-links.mobile a:focus,
-.nav-links.mobile a:active {
-  color: var(--accent-color);
-  outline: none;
-}
-
-/* Asegurarnos de que el <ul> base no tenga fondo por defecto */
-.nav-links {
-  background: none;
-}
-
+        .menu-btn { display: none; cursor: pointer; font-size: 1.5rem; }
 
         /* Mobile menu styles (hidden by default) */
         .nav-links.mobile {
@@ -205,34 +133,81 @@
             margin: 10px auto 0;
         }
 
+        /* Grid flexible y tarjetas consistentes */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
+            align-items: start;
         }
 
         .project-card {
             background-color: var(--card-bg);
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.2s ease;
             border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            min-height: 220px; /* asegura altura uniforme */
+            box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+            overflow: hidden;
         }
 
         .project-card:hover {
             transform: translateY(-7px);
             border-color: var(--accent-color);
+            box-shadow: 0 12px 28px rgba(2,6,23,0.45);
         }
 
-        .project-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.4rem; }
-        .tags { margin: 15px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .project-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.2rem; }
+        .project-card .card-content { display: flex; flex-direction: column; height: 100%; }
+
+        /* Mantener la descripción en caja y no romper el diseño */
+        .project-card p {
+            color: #b8c6e6;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.35;
+            flex: 0 0 auto;
+        }
+
+        .tags { margin: 12px 0; display: flex; gap: 10px; flex-wrap: wrap; }
         .tags span {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--accent-color);
             font-family: monospace;
+            background: rgba(100,255,218,0.04);
+            padding: 4px 8px;
+            border-radius: 6px;
         }
-        .card-links { margin-top: 20px; display: flex; gap: 15px; }
-        .card-links a:hover { color: var(--accent-color); }
+
+        /* Forzar que los links queden al fondo de la tarjeta */
+        .card-links { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
+        .card-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.04);
+            background: transparent;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .card-links a:hover { color: var(--accent-color); background: rgba(100,255,218,0.03); }
+
+        /* Icon spacing */
+        .card-links i { font-size: 0.95rem; }
+
+        /* Mobile tweaks para mantener legibilidad */
+        @media (max-width: 768px) {
+            .projects-section { padding: 60px 20px; }
+            .project-card { min-height: 180px; padding: 16px; }
+            .project-card h3 { font-size: 1.05rem; }
+            .project-card p { font-size: 0.95rem; }
+        }
 
         /* Skills Section */
         .skills-section { padding: 60px 50px; text-align: center; background-color: #0d1e38; }
@@ -354,6 +329,27 @@
                 <a href="#proyectos" class="btn primary">Ver Proyectos</a>
                 <a href="https://github.com/iangusi" target="_blank" class="btn secondary"><i class="fab fa-github"></i> GitHub</a>
             </div>
+
+            <div class="project-card">
+                <div class="card-content">
+                    <h3>HJ-Libretas - Tienda de Libretas</h3>
+                    <p>HJ-Libretas es una tienda en línea especializada en la venta de libretas. El proyecto se encuentra alojado en Netlify y proporciona una plataforma de comercio electrónico para que los clientes puedan explorar y comprar diferentes tipos de libretas. El repositorio contiene la configuración y código necesario para mantener y desplegar la aplicación web.</p>
+                    <div class="tags">
+                        <span>Angular</span>
+                        <span>TypeScript</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>Netlify</span>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://github.com/iangusi/HJ-Libretas" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        <a href="https://hj-libretas.netlify.app/libretas" target="_blank"> Ver Proyecto</a>
+                        <a href="/mnt/data/index.html" target="_blank"><i class="fas fa-file"></i> Archivo local</a>
+                    </div>
+                </div>
+            </div>
+        
         </div>
     </section>
 
@@ -400,6 +396,26 @@
                 </div>
             </div>
 
+        
+            <div class="project-card">
+                <div class="card-content">
+                    <h3>HJ-Libretas - Tienda de Libretas</h3>
+                    <p>HJ-Libretas es una tienda en línea especializada en la venta de libretas. El proyecto se encuentra alojado en Netlify y proporciona una plataforma de comercio electrónico para que los clientes puedan explorar y comprar diferentes tipos de libretas. El repositorio contiene la configuración y código necesario para mantener y desplegar la aplicación web.</p>
+                    <div class="tags">
+                        <span>Angular</span>
+                        <span>TypeScript</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>Netlify</span>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://github.com/iangusi/HJ-Libretas" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        <a href="https://hj-libretas.netlify.app/libretas" target="_blank"> Ver Proyecto</a>
+                        <a href="/mnt/data/index.html" target="_blank"><i class="fas fa-file"></i> Archivo local</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
