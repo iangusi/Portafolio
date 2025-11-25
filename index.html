@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Ian Gutiérrez Segura</title>
+    <style>
+        /* Reset y Variables */
+        :root {
+            --bg-color: #0a192f;
+            --text-color: #ccd6f6;
+            --accent-color: #64ffda;
+            --card-bg: #112240;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: rgba(10, 25, 47, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a:hover { color: var(--accent-color); }
+        .menu-btn { display: none; cursor: pointer; font-size: 1.5rem; }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .greeting { color: var(--accent-color); font-size: 1.2rem; display: block; margin-bottom: 10px; }
+        .hero h1 { font-size: 4rem; color: #fff; margin-bottom: 15px; }
+        .hero p { font-size: 1.5rem; color: #8892b0; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .hero-description {
+            font-size: 1.1rem !important;
+            color: #8892b0;
+            margin-top: 10px;
+            margin-bottom: 30px !important;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-color);
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .btn.primary { background-color: var(--accent-color); color: var(--bg-color); }
+        .btn.primary:hover { background-color: transparent; color: var(--accent-color); }
+        .btn.secondary { color: var(--accent-color); }
+        .btn.secondary:hover { background-color: rgba(100, 255, 218, 0.1); }
+
+        /* Projects Section */
+        .projects-section { padding: 80px 50px; }
+        .section-title {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+            border-color: var(--accent-color);
+        }
+
+        .project-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.4rem; }
+        .tags { margin: 15px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .tags span {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-family: monospace;
+        }
+        .card-links { margin-top: 20px; display: flex; gap: 15px; }
+        .card-links a:hover { color: var(--accent-color); }
+
+        /* Skills Section */
+        .skills-section { padding: 60px 50px; text-align: center; background-color: #0d1e38; }
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .skill-item {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Education Section */
+        .education-section {
+            margin-top: 60px;
+            padding-top: 40px;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .education-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .education-card h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .education-card h3 i {
+            color: var(--accent-color);
+            margin-right: 8px;
+        }
+
+        .education-card .degree {
+            color: var(--text-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .education-card .date {
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer { padding: 40px; text-align: center; font-size: 0.9rem; color: #8892b0; }
+        .socials { margin: 20px 0; font-size: 1.5rem; }
+        .socials a { margin: 0 15px; }
+        .socials a:hover { color: var(--accent-color); }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .menu-btn { display: block; color: var(--accent-color); }
+            .navbar { padding: 20px; }
+            .projects-section { padding: 60px 20px; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Ian Gutiérrez<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <div class="menu-btn"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="greeting">Hola, soy</span>
+            <h1>Ian Gutiérrez Segura</h1>
+            <p>Futuro Ingeniero en Inteligencia Artificial</p>
+            <p>Tecnico en Programación</p>
+            <p class="hero-description">Especializado en Java/Spring Boot y desarrollo full-stack. Apasionado por resolver problemas complejos con soluciones escalables.</p>
+            <div class="hero-btns">
+                <a href="#proyectos" class="btn primary">Ver Proyectos</a>
+                <a href="https://github.com/iangusi" target="_blank" class="btn secondary"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos" class="projects-section">
+        <h2 class="section-title">Mis Proyectos</h2>
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <div class="card-content">
+                    <h3>Click Room - Sistema de Reservas Hoteleras</h3>
+                    <p>Aplicación full-stack desarrollada con metodología Scrum. API RESTful robusta con arquitectura en capas para gestionar usuarios, hoteles, reservaciones y promociones. Con interfaz dinámica e implementación de motor de búsqueda avanzado y manejo complejo de transacciones con base de datos normalizada y relaciones Uno-a-Muchos/Muchos-a-Muchos.</p>
+                    <div class="tags">
+                        <span>Java</span>
+                        <span>Spring Boot</span>
+                        <span>React</span>
+                        <span>MySQL</span>
+                        <span>Hibernate/JPA</span>
+                        <span>Swagger</span>
+                        <span>REST API</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://github.com/iangusi/TDAW-Proyecto-Final" target="_blank"><i class="fab fa-github"></i> Código</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-content">
+                    <h3>Simulador de Autómatas y Rutas en Tablero</h3>
+                    <p>Aplicación web interactiva que simula movimiento de múltiples autómatas en cuadrícula 4x4. Implementa algoritmo DFS (Depth First Search) para calcular rutas que cumplan patrones de restricción de colores. Incluye visualización dinámica de grafos NFA (Autómata Finito No Determinista) con SVG, gestión de concurrencia con sistema de turnos, detección de colisiones, y análisis de rutas ganadoras vs. totales generadas.</p>
+                    <div class="tags">
+                        <span>JavaScript ES6+</span>
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>SVG</span>
+                        <span>DFS Algorithm</span>
+                        <span>NFA</span>
+                        <span>Vanilla JS</span>
+                    </div>
+                    <div class="card-links">
+                        <a href="https://github.com/iangusi/Programa-Tablero" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        <a href="https://iangusi.github.io/Programa-Tablero/" target="_blank"> Ver Proyecto</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="habilidades" class="skills-section">
+        <h2 class="section-title">Habilidades Técnicas</h2>
+        <div class="skills-container">
+            <div class="skill-item">Java</div>
+            <div class="skill-item">Spring Boot</div>
+            <div class="skill-item">Python</div>
+            <div class="skill-item">JavaScript</div>
+            <div class="skill-item">SQL / MySQL</div>
+            <div class="skill-item">C</div>
+            <div class="skill-item">Angular</div>
+            <div class="skill-item">React</div>
+            <div class="skill-item">Django</div>
+            <div class="skill-item">Git / GitHub</div>
+            <div class="skill-item">REST APIs</div>
+            <div class="skill-item">Scrum</div>
+        </div>
+        
+        <div class="education-section">
+            <h2 class="section-title">Educación & Certificaciones</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3><i class="fas fa-graduation-cap"></i> ESCOM - IPN</h3>
+                    <p class="degree">Ingeniería en Inteligencia Artificial</p>
+                    <p class="date">Agosto 2023 - Presente</p>
+                </div>
+                <div class="education-card">
+                    <h3><i class="fas fa-graduation-cap"></i> CECyT 9 Juan de Dios Bátiz - IPN</h3>
+                    <p class="degree">Técnico en Programación</p>
+                    <p class="date">Agosto 2020 - Julio 2023</p>
+                </div>
+                <div class="education-card">
+                    <h3><i class="fas fa-certificate"></i> FreeCodeCamp</h3>
+                    <p class="degree">Scientific Computing with Python</p>
+                    <p class="date">Nov 2023 - Jul 2024</p>
+                </div>
+                <div class="education-card">
+                    <h3><i class="fas fa-certificate"></i> Oracle Next Education</h3>
+                    <p class="degree">Back-end & Base de Datos</p>
+                    <p class="date">Ene 2024 - Jul 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <p>¿Interesado en colaborar? Contáctame.</p>
+        <div class="socials">
+            <a href="https://github.com/iangusi" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/gutiérrez-segura-ian-039677318" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:gutierrez.segura.ian@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+525544835607" aria-label="Teléfono"><i class="fas fa-phone"></i></a>
+        </div>
+        <p class="copyright">&copy; 2025 Ian Gutiérrez Segura. Ingeniero en Inteligencia Artificial | Desarrollador Back-end</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Smooth Scroll para los enlaces de navegación
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 2. Efecto de aparición al hacer scroll (Intersection Observer)
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Aplicar animación a las tarjetas de proyectos
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
