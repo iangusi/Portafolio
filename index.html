@@ -49,7 +49,79 @@
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a:hover { color: var(--accent-color); }
-        .menu-btn { display: none; cursor: pointer; font-size: 1.5rem; }
+        /* --- MENU BUTTON (evitar fondo blanco por defecto) --- */
+.menu-btn {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--accent-color);
+
+  /* Evitar el fondo/blanco por defecto del <button> */
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Ajuste visual del icono dentro del botón */
+.menu-btn i {
+  pointer-events: none;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Hover sutil para indicar interacción */
+.menu-btn:hover {
+  background: rgba(100, 255, 218, 0.06);
+}
+
+/* --- MENÚ MÓVIL (asegurar fondo oscuro y prioridad) --- */
+.nav-links.mobile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 80%;
+  max-width: 320px;
+
+  /* Forzar el color de fondo oscuro (important solo si hace falta sobrescribir) */
+  background-color: rgba(10, 25, 47, 0.98) !important;
+
+  box-shadow: -10px 0 30px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--nav-height) + 20px) 20px;
+  gap: 20px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+
+  z-index: 1100; /* por encima del header */
+  color: var(--text-color); /* asegurar texto claro */
+}
+
+/* Forzar que los enlaces del menú móvil se vean en claro */
+.nav-links.mobile a {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Opcional: foco/activo para accesibilidad */
+.nav-links.mobile a:focus,
+.nav-links.mobile a:active {
+  color: var(--accent-color);
+  outline: none;
+}
+
+/* Asegurarnos de que el <ul> base no tenga fondo por defecto */
+.nav-links {
+  background: none;
+}
+
 
         /* Mobile menu styles (hidden by default) */
         .nav-links.mobile {
@@ -328,7 +400,7 @@
             <div class="hero-btns">
                 <a href="#proyectos" class="btn primary">Ver Proyectos</a>
                 <a href="https://github.com/iangusi" target="_blank" class="btn secondary"><i class="fab fa-github"></i> GitHub</a>
-            </div>
+            </div>        
         </div>
     </section>
 
@@ -391,10 +463,38 @@
                     <div class="card-links">
                         <a href="https://github.com/iangusi/HJ-Libretas" target="_blank"><i class="fab fa-github"></i> Código</a>
                         <a href="https://hj-libretas.netlify.app/libretas" target="_blank"> Ver Proyecto</a>
-                        <a href="/mnt/data/index.html" target="_blank"><i class="fas fa-file"></i> Archivo local</a>
                     </div>
                 </div>
             </div>
+
+            <div class="project-card">
+    <div class="card-content">
+        <h3>Make-Milagrito – Sitio Web de Cafetería y Manualidades</h3>
+        <p>
+            Make-Milagrito es un sitio web para una cafetería y tienda de manualidades,
+            alojado en GitHub Pages. Incluye navegación móvil responsiva, diseño adaptable
+            y mejoras continuas en el repositorio, como la corrección de enlaces en el README
+            y la implementación del menú móvil.
+        </p>
+
+        <div class="tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>GitHub Pages</span>
+            <span>Responsive Design</span>
+        </div>
+
+        <div class="card-links">
+            <a href="https://github.com/iangusi/Make-Milagrito" target="_blank">
+                <i class="fab fa-github"></i> Código
+            </a>
+            <a href="https://iangusi.github.io/Make-Milagrito/" target="_blank">
+                Ver Proyecto
+            </a>
+        </div>
+    </div>
+</div>
+
         </div>
     </section>
 
@@ -566,4 +666,3 @@
     </script>
 </body>
 </html>
-
